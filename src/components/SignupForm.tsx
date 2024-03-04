@@ -67,6 +67,8 @@ const SignupForm: React.FC = () => {
       return;
     }
 
+    console.log("Email:", formData.email, "Password:", formData.password);
+
     setFormData({
       ...formData,
       emailError: "",
@@ -84,83 +86,85 @@ const SignupForm: React.FC = () => {
     <div className="flex justify-center items-center h-screen">
       <form
         onSubmit={handleSignup}
-        className="border-white border-2 border-solid p-4 rounded-md"
+        className="border-white w-[25em] border-2 border-solid p-4 rounded-md"
       >
-        <h2 className="text-2xl mb-4">Registro</h2>
-        {formData.successMessage && (
-          <div className="mb-4 text-green-500">{formData.successMessage}</div>
-        )}
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-white mb-1">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            className="w-full p-1 rounded-lg border-white border-2 border-solid"
-            value={formData.email}
-            onChange={handleInputChange}
-            required
-          />
-          {formData.emailError && (
-            <div className="text-red-500 mb-1">{formData.emailError}</div>
+        <div>
+          <h2 className="text-2xl mb-4">Registro</h2>
+          {formData.successMessage && (
+            <div className="mb-4 text-green-500">{formData.successMessage}</div>
           )}
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-white mb-1">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              className="w-full p-1 rounded-lg border-white border-2 border-solid"
+              value={formData.email}
+              onChange={handleInputChange}
+              required
+            />
+            {formData.emailError && (
+              <div className="text-red-500 mb-1">{formData.emailError}</div>
+            )}
+          </div>
+          <div className="mb-4">
+            <label htmlFor="password" className="block text-white mb-1">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              className="w-full p-1 rounded-lg border-white border-2 border-solid"
+              value={formData.password}
+              onChange={handleInputChange}
+              required
+              autoComplete="current-password"
+            />
+            <div className="mb-1">
+              {formData.passwordErrors.lengthError ? (
+                <span className="text-green-500">
+                  La contraseña tiene al menos 8 letras
+                </span>
+              ) : (
+                <span className="text-red-500">
+                  La contraseña debe tener al menos 8 letras
+                </span>
+              )}
+            </div>
+            <div className="mb-1">
+              {formData.passwordErrors.numberError ? (
+                <span className="text-green-500">
+                  La contraseña tiene al menos un número
+                </span>
+              ) : (
+                <span className="text-red-500">
+                  La contraseña debe tener al menos un número
+                </span>
+              )}
+            </div>
+            <div className="mb-1">
+              {formData.passwordErrors.specialCharacterError ? (
+                <span className="text-green-500">
+                  La contraseña tiene al menos un carácter especial
+                </span>
+              ) : (
+                <span className="text-red-500">
+                  La contraseña necesita un carácter especial
+                </span>
+              )}
+            </div>
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+          >
+            Registrarse
+          </button>
         </div>
-        <div className="mb-4">
-          <label htmlFor="password" className="block text-white mb-1">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            className="w-full p-1 rounded-lg border-white border-2 border-solid"
-            value={formData.password}
-            onChange={handleInputChange}
-            required
-            autoComplete="current-password"
-          />
-          <div className="mb-1">
-            {formData.passwordErrors.lengthError ? (
-              <span className="text-green-500">
-                La contraseña tiene al menos 8 letras
-              </span>
-            ) : (
-              <span className="text-red-500">
-                La contraseña debe tener al menos 8 letras
-              </span>
-            )}
-          </div>
-          <div className="mb-1">
-            {formData.passwordErrors.numberError ? (
-              <span className="text-green-500">
-                La contraseña tiene al menos un número
-              </span>
-            ) : (
-              <span className="text-red-500">
-                La contraseña debe tener al menos un número
-              </span>
-            )}
-          </div>
-          <div className="mb-1">
-            {formData.passwordErrors.specialCharacterError ? (
-              <span className="text-green-500">
-                La contraseña tiene al menos un carácter especial
-              </span>
-            ) : (
-              <span className="text-red-500">
-                La contraseña necesita un carácter especial
-              </span>
-            )}
-          </div>
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-        >
-          Registrarse
-        </button>
       </form>
     </div>
   );
